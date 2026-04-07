@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>คำทำนาย</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #1a0a0a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    .card {
+      max-width: 480px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    }
+    button {
+      width: 100%;
+      padding: 16px;
+      background: #c9963a;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+      cursor: pointer;
+      letter-spacing: 1px;
+    }
+    button:active { opacity: 0.8; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img id="img" src="../Hair03.jpg" alt="คำทำนาย">
+    <button onclick="save()">💾 บันทึกรูปคำทำนาย</button>
+  </div>
+  <script>
+    function save() {
+      fetch('../Hair03.jpg')
+        .then(r => r.blob())
+        .then(blob => {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'fortune3.jpg';
+          a.click();
+          URL.revokeObjectURL(url);
+        });
+    }
+  </script>
+</body>
+</html>
